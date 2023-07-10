@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "DCSSimpleLauncher (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "DCSSimpleLauncher (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
