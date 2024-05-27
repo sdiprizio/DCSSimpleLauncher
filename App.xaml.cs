@@ -48,6 +48,6 @@ namespace DCSSimpleLauncher
             ApplicationDataContainer localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
         }
 
-        public Window Window { get; private set; }
+        public static Window Window { get; private set; }
     }
 }

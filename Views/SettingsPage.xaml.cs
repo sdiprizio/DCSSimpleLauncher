@@ -30,37 +30,48 @@ namespace DCSSimpleLauncher.Views
         public SettingsPage()
         {
             this.InitializeComponent();
+            if (ApplicationData.Current.LocalSettings.Values.ContainsKey("DCSFolder"))
+            {
+                DCSFolderTextBlock.Text = ApplicationData.Current.LocalSettings.Values["DCSFolder"].ToString();
+            }
+            else
+            {
+                DCSFolderTextBlock.Text = "DCS folder not selected.";
+            }
         }
 
-        private async void PickFolderButton_Click(object sender, RoutedEventArgs e)
+        private async void PickDCSFolderButton_Click(object sender, RoutedEventArgs e)
         {
             // Clear previous returned file name, if it exists, between iterations of this scenario
-            PickFolderOutputTextBlock.Text = "";
+            DCSFolderTextBlock.Text = "";
 
             // Create a folder picker
-            FolderPicker openPicker = new FolderPicker();
+            FolderPicker openPicker = new FolderPicker
+            {
+                SuggestedStartLocation = PickerLocationId.ComputerFolder
+            };
+            openPicker.FileTypeFilter.Add("*");
+
+            // See the sample code below for how to make the window accessible from the App class.
+            var window = App.Window;
 
             // Retrieve the window handle (HWND) of the current WinUI 3 window.
-            var window = WindowHelper.GetWindowForElement(this);
             var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
 
-            // Initialize the folder picker with the window handle (HWND).
+            // Initialize the file picker with the window handle (HWND).
             WinRT.Interop.InitializeWithWindow.Initialize(openPicker, hWnd);
 
-            // Set options for your folder picker
-            openPicker.SuggestedStartLocation = PickerLocationId.Desktop;
-            openPicker.FileTypeFilter.Add("*");
 
             // Open the picker for the user to pick a folder
             StorageFolder folder = await openPicker.PickSingleFolderAsync();
             if (folder != null)
             {
-                StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
-                PickFolderOutputTextBlock.Text = "Picked folder: " + folder.Name;
+                // StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
+                ApplicationData.Current.LocalSettings.Values["DCSFolder"] = folder.Path;
             }
             else
             {
-                PickFolderOutputTextBlock.Text = "Operation cancelled.";
+                DCSFolderTextBlock.Text = "Operation cancelled.";
             }
 
         }
