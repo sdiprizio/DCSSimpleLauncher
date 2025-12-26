@@ -6,10 +6,24 @@
     xmlns:local="using:DCSSimpleLauncher.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <Grid>
+    <StackPanel Orientation="Vertical">
+        <TextBlock x:Name="LauncherTitle" Text="Launcher" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,20"/>
 
-    </Grid>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+            <Button x:Name="LaunchDCS" Content="Launch DCS" Click="LaunchDCS_Click"/>
+            <TextBlock Text="Launch DCS without launcher" Padding="20,5,0,0" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+            <Button x:Name="LaunchDCSWithLauncher" Content="Launch DCS with Launcher" Click="LaunchDCSWithLauncher_Click" />
+            <TextBlock Text="Launch DCS with the launcher" Padding="20,5,0,0" />
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+            <Button x:Name="ForceStopDCS" Content="Force Stop DCS" Click="ForceStopDCS_Click" />
+            <TextBlock Text="This will kill all DCS instances. Use it wisely!" Padding="20,5,0,0" />
+        </StackPanel>
+    </StackPanel>
 </Page>

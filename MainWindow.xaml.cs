@@ -2,6 +2,7 @@ using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
@@ -32,6 +33,7 @@ namespace DCSSimpleLauncher
             // 2 lines below are for WinUI 3 but WinUI 3 does not support controls in title bar yet
             ExtendsContentIntoTitleBar = true;
             SetTitleBar(AppTitleBar);
+            ContentFrame.Navigate(typeof(Views.Launcher), null, new SuppressNavigationTransitionInfo());
             //AppTitleBar.Loaded += AppTitleBarLoaded;
             //AppTitleBar.SizeChanged += AppTitleBarSizeChanged;
         }

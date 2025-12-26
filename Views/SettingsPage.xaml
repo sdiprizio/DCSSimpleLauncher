@@ -10,11 +10,25 @@
     Background="{ThemeResource LayerOnMicaBaseAltFillColorDefaultBrush}">
 
     <StackPanel Orientation="Vertical">
-        <TextBlock x:Name="DCSFolderTitle" Text="DCS Folder" Style="{StaticResource TitleTextBlockStyle}" Margin="0,0,0,10"/>
+        <TextBlock x:Name="SettingsTitle" Text="Settings" Style="{StaticResource TitleTextBlockStyle}" />
+        
+        <TextBlock x:Name="DCSFolderTitle" Text="DCS Folder" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,20,0,10"/>
         <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
             <Button x:Name="PickDCSFolderButton" Content="Set DCS folder"
             Click="PickDCSFolderButton_Click" Margin="0,0,0,10"/>
             <TextBlock x:Name="DCSFolderTextBlock" FontFamily="Consolas" TextWrapping="Wrap" Padding="20,5,0,0"/>
+        </StackPanel>
+        <TextBlock x:Name="DCSSaveFolder" Text="Saved Games DCS folder" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,20,0,10"/>
+        <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
+            <Button x:Name="PickSavedGamesDCSFolderButton" Content="Set DCS folder"
+                    Click="SavedGamesPickDCSFolderButton_Click" Margin="0,0,0,10"/>
+            <TextBlock x:Name="SavedGamesDCSFolderTextBlock" FontFamily="Consolas" TextWrapping="Wrap" Padding="20,5,0,0"/>
+        </StackPanel>
+        <TextBlock x:Name="DCSLauncherSaveFolder" Text="DCSLauncher data folder" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,20,0,10"/>
+        <StackPanel VerticalAlignment="Top" Orientation="Horizontal">
+            <Button x:Name="PickDCSLauncherFolderButton" Content="Set DCS folder"
+                    Click="PicckDCSLauncherFolderButton_Click" Margin="0,0,0,10"/>
+            <TextBlock x:Name="DCSLauncherFolderTextBlock" FontFamily="Consolas" TextWrapping="Wrap" Padding="20,5,0,0"/>
         </StackPanel>
     </StackPanel>
 </Page>
