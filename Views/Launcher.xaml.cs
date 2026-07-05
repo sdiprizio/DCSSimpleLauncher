@@ -1,15 +1,12 @@
 using DCSSimpleLauncher.Data;
 using DCSSimpleLauncher.Helper;
 using Lua;
-using Lua.Standard;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Threading.Tasks;
 using Windows.Storage;
 
 // To learn more about WinUI, the WinUI project structure,

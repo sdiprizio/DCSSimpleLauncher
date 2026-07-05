@@ -277,6 +277,32 @@ namespace DCSSimpleLauncher.Views
 
             var argsBox = new TextBox { Header = "Default launch arguments", Text = existing?.Args ?? "" };
             var workingDirBox = new TextBox { Header = "Working directory (optional)", Text = existing?.WorkingDirectory ?? "" };
+            var browseWorkingDirButton = new Button { Content = "Browse...", Margin = new Thickness(0, 4, 0, 0) };
+            browseWorkingDirButton.Click += async (_, _) =>
+            {
+                var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(App.Window);
+                var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hWnd);
+                var picker = new Microsoft.Windows.Storage.Pickers.FolderPicker(windowId);
+
+                var startFolder = !string.IsNullOrWhiteSpace(workingDirBox.Text)
+                    ? workingDirBox.Text
+                    : Path.GetDirectoryName(pathBox.Text);
+                if (!string.IsNullOrEmpty(startFolder))
+                {
+                    picker.SuggestedStartFolder = startFolder;
+                }
+
+                var folder = await picker.PickSingleFolderAsync();
+                if (folder != null)
+                {
+                    workingDirBox.Text = folder.Path;
+                }
+            };
+
+            var workingDirPanel = new StackPanel();
+            workingDirPanel.Children.Add(workingDirBox);
+            workingDirPanel.Children.Add(browseWorkingDirButton);
+
             var runAsAdminCheckBox = new CheckBox { Content = "Run as administrator", IsChecked = existing?.RunAsAdmin ?? false };
 
             var hideWindowCheckBox = new CheckBox { Content = "Hide window after launch", IsChecked = existing?.Minimize ?? false };
@@ -299,7 +325,7 @@ namespace DCSSimpleLauncher.Views
             panel.Children.Add(nameBox);
             panel.Children.Add(pathPanel);
             panel.Children.Add(argsBox);
-            panel.Children.Add(workingDirBox);
+            panel.Children.Add(workingDirPanel);
             panel.Children.Add(runAsAdminCheckBox);
             panel.Children.Add(hideWindowCheckBox);
             panel.Children.Add(hideDelayRow);
@@ -307,7 +333,13 @@ namespace DCSSimpleLauncher.Views
             dialog = new ContentDialog
             {
                 Title = existing is null ? "Add External Tool" : "Edit External Tool",
-                Content = panel,
+                Content = new ScrollViewer
+                {
+                    Content = panel,
+                    MaxHeight = 500,
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    VerticalScrollMode = ScrollMode.Auto
+                },
                 PrimaryButtonText = "Save",
                 CloseButtonText = "Cancel",
                 XamlRoot = this.XamlRoot

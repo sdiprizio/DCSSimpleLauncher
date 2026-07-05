@@ -26,8 +26,8 @@ namespace DCSSimpleLauncher
 
             // Load saved size (if exists)
             var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-            Int32 Width = localSettings.Values.ContainsKey("AppWindowWidth") ? (Int32) localSettings.Values["AppWindowWidth"] : 800;
-            Int32 Height = localSettings.Values.ContainsKey("AppWindowHeight") ? (Int32) localSettings.Values["AppWindowHeight"] : 600;
+            Int32 Width = localSettings.Values.ContainsKey("AppWindowWidth") ? (Int32) localSettings.Values["AppWindowWidth"] : 900;
+            Int32 Height = localSettings.Values.ContainsKey("AppWindowHeight") ? (Int32) localSettings.Values["AppWindowHeight"] : 800;
 
             AppWindow.Resize(new (){ Width = Width, Height = Height });
 
