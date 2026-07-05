@@ -24,6 +24,15 @@ namespace DCSSimpleLauncher
         {
             this.InitializeComponent();
 
+            // Load saved size (if exists)
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            Int32 Width = localSettings.Values.ContainsKey("AppWindowWidth") ? (Int32) localSettings.Values["AppWindowWidth"] : 800;
+            Int32 Height = localSettings.Values.ContainsKey("AppWindowHeight") ? (Int32) localSettings.Values["AppWindowHeight"] : 600;
+
+            AppWindow.Resize(new (){ Width = Width, Height = Height });
+
+            AppWindow.Closing += MainWindow_Closing;
+
             //AppWindow.Changed += AppWindowChanged;
 
             //AppWindow.TitleBar.ExtendsContentIntoTitleBar = true;
@@ -38,6 +47,13 @@ namespace DCSSimpleLauncher
             //AppTitleBar.SizeChanged += AppTitleBarSizeChanged;
         }
 
+        private void MainWindow_Closing(AppWindow window, AppWindowClosingEventArgs e)
+        {
+            var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
+            localSettings.Values["AppWindowWidth"] = window.Size.Width;
+            localSettings.Values["AppWindowHeight"] = window.Size.Height;
+        }
+
         private void MainNavigation_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked == true)
@@ -50,6 +66,9 @@ namespace DCSSimpleLauncher
                 {
                     case "Launcher":
                         ContentFrame.Navigate(typeof(Views.Launcher), null, args.RecommendedNavigationTransitionInfo);
+                        break;
+                    case "ExternalToolsPage":
+                        ContentFrame.Navigate(typeof(Views.ExternalToolsPage), null, args.RecommendedNavigationTransitionInfo);
                         break;
                 }
             }

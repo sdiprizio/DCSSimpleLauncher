@@ -11,7 +11,7 @@ namespace DCSSimpleLauncher.Helper
     {
         extension(LuaTable table)
         {
-            public string ToFormattedString(int indentLevel = 1, StringBuilder sb = null)
+            public string ToFormattedString(int indentLevel = 1, StringBuilder? sb = null)
             {
                 sb ??= new StringBuilder();
                 string indent = new string('\t', indentLevel);

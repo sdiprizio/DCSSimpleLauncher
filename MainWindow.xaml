@@ -39,6 +39,7 @@
                         ItemInvoked="MainNavigation_ItemInvoked">
             <NavigationView.MenuItems>
                 <NavigationViewItem Icon="Play" Content="Launcher" Tag="Launcher" />
+                <NavigationViewItem Icon="AllApps" Content="External Tools" Tag="ExternalToolsPage" />
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" 
                    Margin="10,10,10,10"/>

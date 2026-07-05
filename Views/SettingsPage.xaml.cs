@@ -1,3 +1,4 @@
+using DCSSimpleLauncher.Helper;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using System;
@@ -21,9 +22,9 @@ public sealed partial class SettingsPage : Page
     {
         this.InitializeComponent();
 
-        DCSFolderTextBlock.Text = ApplicationData.Current.LocalSettings.Values["DCSFolder"]?.ToString() ?? "DCS folder not selected.";
-        SavedGamesDCSFolderTextBlock.Text = ApplicationData.Current.LocalSettings.Values["SavedGamesDCSFolder"]?.ToString() ?? "DCS folder not selected.";
-        DCSLauncherFolderTextBlock.Text = ApplicationData.Current.LocalSettings.Values["DCSLauncherFolder"]?.ToString() ?? "DCS Launcher folder not selected.";
+        DCSFolderTextBlock.Text = ApplicationData.Current.LocalSettings.Values[SettingsKeys.DCS_FOLDER]?.ToString() ?? "DCS folder not selected.";
+        SavedGamesDCSFolderTextBlock.Text = ApplicationData.Current.LocalSettings.Values[SettingsKeys.SAVEDGAMES_DCS_FOLDER]?.ToString() ?? "DCS folder not selected.";
+        DCSLauncherFolderTextBlock.Text = ApplicationData.Current.LocalSettings.Values[SettingsKeys.SAVEDGAMES_DCSLAUNCHER_FOLDER]?.ToString() ?? "DCS Launcher folder not selected.";
     }
 
     private async void PickDCSFolderButton_Click(object sender, RoutedEventArgs e)
@@ -50,7 +51,7 @@ public sealed partial class SettingsPage : Page
         if (folder != null)
         {
             // StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
-            ApplicationData.Current.LocalSettings.Values["DCSFolder"] = folder.Path;
+            ApplicationData.Current.LocalSettings.Values[SettingsKeys.DCS_FOLDER] = folder.Path;
             DCSFolderTextBlock.Text = folder.Path;
         }
 
@@ -77,7 +78,7 @@ public sealed partial class SettingsPage : Page
         if (folder != null)
         {
             // StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
-            ApplicationData.Current.LocalSettings.Values["SavedGamesDCSFolder"] = folder.Path;
+            ApplicationData.Current.LocalSettings.Values[SettingsKeys.SAVEDGAMES_DCS_FOLDER] = folder.Path;
             SavedGamesDCSFolderTextBlock.Text = folder.Path;
         }
     }
@@ -100,7 +101,7 @@ public sealed partial class SettingsPage : Page
         if (folder != null)
         {
             // StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
-            ApplicationData.Current.LocalSettings.Values["DCSLauncherFolder"] = folder.Path;
+            ApplicationData.Current.LocalSettings.Values[SettingsKeys.SAVEDGAMES_DCSLAUNCHER_FOLDER] = folder.Path;
             DCSLauncherFolderTextBlock.Text = folder.Path;
         }
     }

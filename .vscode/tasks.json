@@ -9,6 +9,7 @@
                 "build",
                 "${workspaceFolder}/DCSSimpleLauncher.csproj",
                 "/property:GenerateFullPaths=true",
+                "/property:Platform=x64",
                 "/consoleloggerparameters:NoSummary"
             ],
             "problemMatcher": "$msCompile"
